@@ -1,13 +1,13 @@
 import express from "express"
-import UserRoute from './routes/user'
-import connectDB  from "./config/connection"
 import dotenv from "dotenv"
+import connectDB  from "./config/connection"
+import UserRoute from './routes/user'
 
 dotenv.config();
 
-const port = process.env.PORT;
-
 const app = express()
+
+const port = process.env.PORT;
 
 connectDB();
 
