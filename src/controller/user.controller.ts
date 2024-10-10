@@ -1,8 +1,10 @@
 
 import { Request, Response } from "express";
 import UserModel from "../models/user..model";
+import bcrypt from "bcrypt"
+const saltRounds = 10;
 
-export const register = async (req: Request, res: Response): Promise<void> => {
+export const SignUp = async (req: Request, res: Response): Promise<void> => {
     try {
         const { email, password } = req.body;
         if (!email && !password) {
@@ -12,6 +14,17 @@ export const register = async (req: Request, res: Response): Promise<void> => {
         if (user) {
             throw new Error("User alrady axist")
         }
+
+         const hashedpassword = bcrypt.hashSync(password, saltRounds)
+         
+         await UserModel.create({
+            email,
+            password:hashedpassword,
+         })
+         res.status(200).json({
+            status_code: 200,
+            message: " User resistred successfully.",
+          });
 
     } catch (error) {
         console.error(error);
