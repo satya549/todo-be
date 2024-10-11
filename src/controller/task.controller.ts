@@ -63,8 +63,8 @@ export const UpdateTask = async (req: Request,res: Response): Promise<void> => {
         throw new Error("Task not found.");
     }
     res.status(200).json({
-      status_code: 200,
       message: "task Updated Successfully.",
+      data:task
     });
   } catch (error) {
     console.error(error);

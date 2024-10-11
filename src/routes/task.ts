@@ -5,8 +5,8 @@ const router = Router();
 
 router.post('/create', Createtask);
 router.get('/gettask', GetTask);
-router.put('/updatatask', UpdateTask);
-router.delete('/deletetask', DeleteTask);
+router.put('/updatatask/:id', UpdateTask);
+router.delete('/deletetask/:id', DeleteTask);
 
 
 export default router;
