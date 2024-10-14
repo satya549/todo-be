@@ -37,7 +37,6 @@ export const GetTask = async (req: Request, res: Response): Promise<void> => {
     res.status(200).json({
         tasks,
         success:true,
-        status_code: 200 
       });
   } catch (error) {
     console.error(error);
