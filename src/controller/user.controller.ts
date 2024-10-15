@@ -27,7 +27,7 @@ export const SignUp = async (req: Request, res: Response): Promise<void> => {
       password: hashedpassword,
     });
     res.status(200).json({
-      status_code: 200,
+      success:true,
       message: " User resistred successfully.",
     });
   } catch (error) {
