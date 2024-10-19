@@ -3,13 +3,15 @@ import TaskModel from "../models/task.model";
 
 export const Createtask = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { title, description } = req.body;
+    const { title, description, priority, dueDate} = req.body;
     if (!title || !description) {
       throw new Error("Title and description are required. ");
     }
     const task = new TaskModel({
       title,
       description,
+      priority,
+      dueDate,
     });
 
     await task.save();
