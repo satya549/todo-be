@@ -37,8 +37,9 @@ export const GetTask = async (req: Request, res: Response): Promise<void> => {
         throw new Error("Task not found")
     }
     res.status(200).json({
-        tasks,
-        success:true,
+      success:true,
+      message: "Get Tasks successfully",
+      data:tasks
       });
   } catch (error) {
     console.error(error);
@@ -52,11 +53,11 @@ export const GetTask = async (req: Request, res: Response): Promise<void> => {
 export const UpdateTask = async (req: Request,res: Response): Promise<void> => {
   try {
     const { id } = req.params;
-    const { title, description } = req.body;
+    const { title, description, priority, dueDate } = req.body;
 
     const task = await TaskModel.findByIdAndUpdate(
       id,
-      { title, description },
+      { title, description, priority, dueDate },
       { new: true, runValidators: true }
     );
 
@@ -64,6 +65,7 @@ export const UpdateTask = async (req: Request,res: Response): Promise<void> => {
         throw new Error("Task not found.");
     }
     res.status(200).json({
+      success: true,
       message: "task Updated Successfully.",
       data:task
     });
@@ -88,13 +90,13 @@ export const DeleteTask = async (req: Request, res: Response): Promise<void> => 
       }
 
       res.status(200).json({
-        status_code: 200,
+        success: true,
         message: "task Deleted Successfully.",
       });
     } catch (error) {
       console.error(error);
-      res.status(400).json({
-        statusCode: 400,
+      res.status(500).json({
+        success: false,
         message: (error as Error).message,
       });
     }
