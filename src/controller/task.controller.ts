@@ -1,11 +1,11 @@
 import express, { Request, Response } from "express";
 import TaskModel from "../models/task.model";
 
-export const Createtask = async (req: Request, res: Response): Promise<void> => {
+export const CreateTask = async (req: Request, res: Response): Promise<void> => {
   try {
     const { title, description, priority, dueDate} = req.body;
-    if (!title || !description) {
-      throw new Error("Title and description are required. ");
+    if (!title || !description || !priority || !dueDate) {
+      throw new Error("Title, description, priority, and due date are all required. ");
     }
     const task = new TaskModel({
       title,
@@ -18,7 +18,7 @@ export const Createtask = async (req: Request, res: Response): Promise<void> => 
 
     res.status(200).json({
       success:true,
-      message: "task Created Successfully.",
+      message: "task created successfully.",
     });
   } catch (error) {
     console.error(error);
@@ -66,7 +66,7 @@ export const UpdateTask = async (req: Request,res: Response): Promise<void> => {
     }
     res.status(200).json({
       success: true,
-      message: "task Updated Successfully.",
+      message: "task updated successfully.",
       data:task
     });
   } catch (error) {
@@ -91,7 +91,7 @@ export const DeleteTask = async (req: Request, res: Response): Promise<void> => 
 
       res.status(200).json({
         success: true,
-        message: "task Deleted Successfully.",
+        message: "task deleted successfully.",
       });
     } catch (error) {
       console.error(error);
